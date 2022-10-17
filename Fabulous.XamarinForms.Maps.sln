@@ -33,9 +33,9 @@ Global
 		{77D266C1-CEB9-4342-BCCF-C767B4D9C3B6}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
 		{1C73C577-0B28-46E8-90F6-60868E259B01}.Release|Any CPU.ActiveCfg = Release|iPhoneSimulator
 		{1C73C577-0B28-46E8-90F6-60868E259B01}.Release|Any CPU.Build.0 = Release|iPhoneSimulator
-		{1C73C577-0B28-46E8-90F6-60868E259B01}.Debug|Any CPU.ActiveCfg = Debug|iPhone
-		{1C73C577-0B28-46E8-90F6-60868E259B01}.Debug|Any CPU.Build.0 = Debug|iPhone
-		{1C73C577-0B28-46E8-90F6-60868E259B01}.Debug|Any CPU.Deploy.0 = Debug|iPhone
+		{1C73C577-0B28-46E8-90F6-60868E259B01}.Debug|Any CPU.ActiveCfg = Debug|iPhoneSimulator
+		{1C73C577-0B28-46E8-90F6-60868E259B01}.Debug|Any CPU.Build.0 = Debug|iPhoneSimulator
+		{1C73C577-0B28-46E8-90F6-60868E259B01}.Debug|Any CPU.Deploy.0 = Debug|iPhoneSimulator
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{42433804-9F8B-4F47-9A69-8073E0E7259C} = {C85DF18C-B918-40DA-907C-29F57C72A6D9}
