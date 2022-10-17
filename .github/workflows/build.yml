@@ -29,4 +29,4 @@ jobs:
         dotnet pack -p:Version=${VERSION}-nightly-${GITHUB_RUN_ID} --configuration Release --output nupkgs ${SLN_FILE}
     - name: Push
       run: |
-        dotnet nuget push "nupkgs/*.nupkg" -s https://nuget.pkg.github.com/fsprojects/index.json -k ${{ secrets.GITHUB_TOKEN }} --skip-duplicate
+        dotnet nuget push "nupkgs/*.nupkg" -s https://nuget.pkg.github.com/fsharp-mobile/index.json -k ${{ secrets.GITHUB_TOKEN }} --skip-duplicate
