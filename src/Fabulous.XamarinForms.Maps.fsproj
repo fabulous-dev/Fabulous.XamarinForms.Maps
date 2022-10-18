@@ -15,6 +15,10 @@
         <None Include="PackageREADME.md" Pack="true" PackagePath="\" />
         <None Include="../logo/nuget-icon.png" Pack="true" PackagePath="\" />
         <Compile Include="Pin.fs" />
+        <Compile Include="MapElement.fs" />
+        <Compile Include="Polygon.fs" />
+        <Compile Include="Polyline.fs" />
+        <Compile Include="Circle.fs" />
         <Compile Include="Map.fs" />
     </ItemGroup>
 

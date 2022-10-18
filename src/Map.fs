@@ -46,6 +46,9 @@ module Map =
     let Pins =
         Attributes.defineListWidgetCollection "Map_Pins" (fun target -> (target :?> Map).Pins)
 
+    let MapElements =
+        Attributes.defineListWidgetCollection "Map_MapElements" (fun target -> (target :?> Map).MapElements)
+
     let MapClicked =
         Attributes.defineEvent<MapClickedEventArgs> "Map_MapClicked" (fun target -> (target :?> Map).MapClicked)
 
@@ -54,14 +57,18 @@ module MapBuilders =
     type Fabulous.XamarinForms.View with
 
         /// Defines a Map widget
-        static member inline Map<'msg>(requestedRegion: MapSpan) =
-            WidgetBuilder<'msg, IMap>(
-                Map.WidgetKey,
-                AttributesBundle(StackList.one (Map.RequestedRegion.WithValue(requestedRegion)), ValueNone, ValueNone)
-            )
+        static member inline Map<'msg>() =
+            WidgetBuilder<'msg, IMap>(Map.WidgetKey, AttributesBundle(StackList.empty (), ValueNone, ValueNone))
+
+        static member inline MapWithPins<'msg>() =
+            CollectionBuilder<'msg, IMap, IPin>(Map.WidgetKey, Map.Pins)
 
 [<Extension>]
 type MapModifiers =
+
+    [<Extension>]
+    static member inline moveToRegion(this: WidgetBuilder<'msg, #IMap>, mapSpan: MapSpan) =
+        this.AddScalar(Map.RequestedRegion.WithValue(mapSpan))
 
     [<Extension>]
     static member inline hasZoomEnabled(this: WidgetBuilder<'msg, #IMap>, value: bool) =
@@ -91,9 +98,13 @@ type MapModifiers =
     static member inline onMapClicked(this: WidgetBuilder<'msg, #IMap>, onMapClicked: Position -> 'msg) =
         this.AddScalar(Map.MapClicked.WithValue(fun args -> onMapClicked args.Position |> box))
 
+    // [<Extension>]
+    // static member inline pins<'msg, 'marker when 'marker :> IMap>(this: WidgetBuilder<'msg, 'marker>) =
+    //     WidgetHelpers.buildAttributeCollection<'msg, 'marker, IPin> Map.Pins this
+
     [<Extension>]
-    static member inline pins<'msg, 'marker when 'marker :> IMap>(this: WidgetBuilder<'msg, 'marker>) =
-        WidgetHelpers.buildAttributeCollection<'msg, 'marker, IPin> Map.Pins this
+    static member inline mapElements<'msg, 'marker when 'marker :> IMap>(this: WidgetBuilder<'msg, 'marker>) =
+        WidgetHelpers.buildAttributeCollection<'msg, 'marker, IMapElement> Map.MapElements this
 
     /// <summary>Link a ViewRef to access the direct Map control instance</summary>
     [<Extension>]
@@ -115,5 +126,38 @@ type CollectionBuilderExtensions =
         (
             _: AttributeCollectionBuilder<'msg, 'marker, IPin>,
             x: WidgetBuilder<'msg, Memo.Memoized<'itemType>>
+        ) : Content<'msg> =
+        { Widgets = MutStackArray1.One(x.Compile()) }
+
+    [<Extension>]
+    static member inline Yield<'msg, 'marker, 'itemType when 'itemType :> IMapElement>
+        (
+            _: AttributeCollectionBuilder<'msg, 'marker, IMapElement>,
+            x: WidgetBuilder<'msg, 'itemType>
+        ) : Content<'msg> =
+        { Widgets = MutStackArray1.One(x.Compile()) }
+
+    [<Extension>]
+    static member inline Yield<'msg, 'marker, 'itemType when 'itemType :> IMapElement>
+        (
+            _: AttributeCollectionBuilder<'msg, 'marker, IMapElement>,
+            x: WidgetBuilder<'msg, Memo.Memoized<'itemType>>
+        ) : Content<'msg> =
+        { Widgets = MutStackArray1.One(x.Compile()) }
+
+
+    [<Extension>]
+    static member inline Yield<'msg, 'marker, 'itemType when 'itemType :> IPin>
+        (
+            _: CollectionBuilder<'msg, 'marker, IPin>,
+            x: WidgetBuilder<'msg, Memo.Memoized<'itemType>>
+        ) : Content<'msg> =
+        { Widgets = MutStackArray1.One(x.Compile()) }
+
+    [<Extension>]
+    static member inline Yield<'msg, 'marker, 'itemType when 'itemType :> IPin>
+        (
+            _: CollectionBuilder<'msg, 'marker, IPin>,
+            x: WidgetBuilder<'msg, 'itemType>
         ) : Content<'msg> =
         { Widgets = MutStackArray1.One(x.Compile()) }
