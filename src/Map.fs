@@ -3,6 +3,7 @@
 open System.Runtime.CompilerServices
 open Fabulous
 open Fabulous.StackAllocatedCollections
+open Fabulous.StackAllocatedCollections.StackList
 open Fabulous.XamarinForms
 open Xamarin.Forms.Maps
 
@@ -54,7 +55,10 @@ module MapBuilders =
 
         /// Defines a Map widget
         static member inline Map<'msg>(requestedRegion: MapSpan) =
-            CollectionBuilder<'msg, IMap, IPin>(Map.WidgetKey, Map.Pins, Map.RequestedRegion.WithValue(requestedRegion))
+            WidgetBuilder<'msg, IMap>(
+                Map.WidgetKey,
+                AttributesBundle(StackList.one (Map.RequestedRegion.WithValue(requestedRegion)), ValueNone, ValueNone)
+            )
 
 [<Extension>]
 type MapModifiers =
@@ -80,12 +84,16 @@ type MapModifiers =
         this.AddScalar(Map.TrafficEnabled.WithValue(value))
 
     [<Extension>]
-    static member inline moveToLastRegionOnLayout(this: WidgetBuilder<'msg, #IMap>, value: bool) =
+    static member inline moveToLastRegionOnLayoutChange(this: WidgetBuilder<'msg, #IMap>, value: bool) =
         this.AddScalar(Map.MoveToLastRegionOnLayoutChange.WithValue(value))
 
     [<Extension>]
     static member inline onMapClicked(this: WidgetBuilder<'msg, #IMap>, onMapClicked: Position -> 'msg) =
         this.AddScalar(Map.MapClicked.WithValue(fun args -> onMapClicked args.Position |> box))
+
+    [<Extension>]
+    static member inline pins<'msg, 'marker when 'marker :> IMap>(this: WidgetBuilder<'msg, 'marker>) =
+        WidgetHelpers.buildAttributeCollection<'msg, 'marker, IPin> Map.Pins this
 
     /// <summary>Link a ViewRef to access the direct Map control instance</summary>
     [<Extension>]
@@ -97,7 +105,7 @@ type CollectionBuilderExtensions =
     [<Extension>]
     static member inline Yield<'msg, 'marker, 'itemType when 'itemType :> IPin>
         (
-            _: CollectionBuilder<'msg, 'marker, IPin>,
+            _: AttributeCollectionBuilder<'msg, 'marker, IPin>,
             x: WidgetBuilder<'msg, 'itemType>
         ) : Content<'msg> =
         { Widgets = MutStackArray1.One(x.Compile()) }
@@ -105,7 +113,7 @@ type CollectionBuilderExtensions =
     [<Extension>]
     static member inline Yield<'msg, 'marker, 'itemType when 'itemType :> IPin>
         (
-            _: CollectionBuilder<'msg, 'marker, IPin>,
+            _: AttributeCollectionBuilder<'msg, 'marker, IPin>,
             x: WidgetBuilder<'msg, Memo.Memoized<'itemType>>
         ) : Content<'msg> =
         { Widgets = MutStackArray1.One(x.Compile()) }

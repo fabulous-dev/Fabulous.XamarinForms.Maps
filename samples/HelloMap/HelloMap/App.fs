@@ -30,7 +30,7 @@ module App =
         Application(
             ContentPage(
                 "HelloMap",
-                (Map(requestedRegion model.Position) {
+                (Map(requestedRegion model.Position).pins () {
                     Pin(PinType.Place, "I'm a marker", model.Position)
                         .address("My Address")
                         .onMarkerClicked(MarkerClicked)
