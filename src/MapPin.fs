@@ -5,10 +5,11 @@ open Fabulous
 open Fabulous.XamarinForms
 open Xamarin.Forms.Maps
 
-type IPin =
+
+type IMapPin =
     inherit Fabulous.XamarinForms.IElement
 
-module Pin =
+module MapPin =
     let WidgetKey = Widgets.register<Pin> ()
 
     let PinType = Attributes.defineBindableWithEquality<PinType> Pin.TypeProperty
@@ -27,39 +28,36 @@ module Pin =
             (target :?> Pin).InfoWindowClicked)
 
 [<AutoOpen>]
-module PinBuilders =
+module MapPinBuilders =
     type Fabulous.XamarinForms.View with
 
         /// Defines a Pin widget
-        static member inline Pin<'msg>(position: Position) =
-            WidgetBuilder<'msg, IPin>(
-                Pin.WidgetKey,
-                Pin.Position.WithValue(position)
-            )
+        static member inline MapPin<'msg>(position: Position) =
+            WidgetBuilder<'msg, IMapPin>(MapPin.WidgetKey, MapPin.Position.WithValue(position))
 
 [<Extension>]
-type PinModifiers =
+type MapPinModifiers =
     [<Extension>]
-    static member inline address(this: WidgetBuilder<'msg, #IPin>, value: string) =
-        this.AddScalar(Pin.Address.WithValue(value))
-        
-    [<Extension>]
-    static member inline label(this: WidgetBuilder<'msg, #IPin>, value: string) =
-        this.AddScalar(Pin.Label.WithValue(value))
-        
-    [<Extension>]
-    static member inline pinType(this: WidgetBuilder<'msg, #IPin>, value: PinType) =
-        this.AddScalar(Pin.PinType.WithValue(value))
+    static member inline address(this: WidgetBuilder<'msg, #IMapPin>, value: string) =
+        this.AddScalar(MapPin.Address.WithValue(value))
 
     [<Extension>]
-    static member inline onMarkerClicked(this: WidgetBuilder<'msg, #IPin>, onMarkerClicked: bool -> 'msg) =
-        this.AddScalar(Pin.MarkerClicked.WithValue(fun args -> onMarkerClicked args.HideInfoWindow |> box))
+    static member inline label(this: WidgetBuilder<'msg, #IMapPin>, value: string) =
+        this.AddScalar(MapPin.Label.WithValue(value))
 
     [<Extension>]
-    static member inline onInfoWindowClicked(this: WidgetBuilder<'msg, #IPin>, onInfoWindowClicked: bool -> 'msg) =
-        this.AddScalar(Pin.InfoWindowClicked.WithValue(fun args -> onInfoWindowClicked args.HideInfoWindow |> box))
+    static member inline pinType(this: WidgetBuilder<'msg, #IMapPin>, value: PinType) =
+        this.AddScalar(MapPin.PinType.WithValue(value))
+
+    [<Extension>]
+    static member inline onMarkerClicked(this: WidgetBuilder<'msg, #IMapPin>, onMarkerClicked: bool -> 'msg) =
+        this.AddScalar(MapPin.MarkerClicked.WithValue(fun args -> onMarkerClicked args.HideInfoWindow |> box))
+
+    [<Extension>]
+    static member inline onInfoWindowClicked(this: WidgetBuilder<'msg, #IMapPin>, onInfoWindowClicked: bool -> 'msg) =
+        this.AddScalar(MapPin.InfoWindowClicked.WithValue(fun args -> onInfoWindowClicked args.HideInfoWindow |> box))
 
     /// <summary>Link a ViewRef to access the direct Pin control instance</summary>
     [<Extension>]
-    static member inline reference(this: WidgetBuilder<'msg, IPin>, value: ViewRef<Pin>) =
+    static member inline reference(this: WidgetBuilder<'msg, IMapPin>, value: ViewRef<Pin>) =
         this.AddScalar(ViewRefAttributes.ViewRef.WithValue(value.Unbox))

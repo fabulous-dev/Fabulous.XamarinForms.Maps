@@ -60,12 +60,19 @@ module MapBuilders =
         static member inline Map<'msg>(?requestRegion: MapSpan) =
             match requestRegion with
             | Some mapSpan ->
-                WidgetBuilder<'msg, IMap>(Map.WidgetKey, AttributesBundle(StackList.one(Map.RequestedRegion.WithValue(mapSpan)), ValueNone, ValueNone))
+                WidgetBuilder<'msg, IMap>(
+                    Map.WidgetKey,
+                    AttributesBundle(StackList.one (Map.RequestedRegion.WithValue(mapSpan)), ValueNone, ValueNone)
+                )
             | None ->
                 WidgetBuilder<'msg, IMap>(Map.WidgetKey, AttributesBundle(StackList.empty (), ValueNone, ValueNone))
 
         static member inline MapWithPins<'msg>(requestRegion: MapSpan) =
-            CollectionBuilder<'msg, IMap, IPin>(Map.WidgetKey, Map.Pins, Map.RequestedRegion.WithValue(requestRegion))
+            CollectionBuilder<'msg, IMap, IMapPin>(
+                Map.WidgetKey,
+                Map.Pins,
+                Map.RequestedRegion.WithValue(requestRegion)
+            )
 
 [<Extension>]
 type MapModifiers =
@@ -109,17 +116,17 @@ type MapModifiers =
 [<Extension>]
 type CollectionBuilderExtensions =
     [<Extension>]
-    static member inline Yield<'msg, 'marker, 'itemType when 'itemType :> IPin>
+    static member inline Yield<'msg, 'marker, 'itemType when 'itemType :> IMapPin>
         (
-            _: AttributeCollectionBuilder<'msg, 'marker, IPin>,
+            _: AttributeCollectionBuilder<'msg, 'marker, IMapPin>,
             x: WidgetBuilder<'msg, 'itemType>
         ) : Content<'msg> =
         { Widgets = MutStackArray1.One(x.Compile()) }
 
     [<Extension>]
-    static member inline Yield<'msg, 'marker, 'itemType when 'itemType :> IPin>
+    static member inline Yield<'msg, 'marker, 'itemType when 'itemType :> IMapPin>
         (
-            _: AttributeCollectionBuilder<'msg, 'marker, IPin>,
+            _: AttributeCollectionBuilder<'msg, 'marker, IMapPin>,
             x: WidgetBuilder<'msg, Memo.Memoized<'itemType>>
         ) : Content<'msg> =
         { Widgets = MutStackArray1.One(x.Compile()) }
@@ -142,17 +149,17 @@ type CollectionBuilderExtensions =
 
 
     [<Extension>]
-    static member inline Yield<'msg, 'marker, 'itemType when 'itemType :> IPin>
+    static member inline Yield<'msg, 'marker, 'itemType when 'itemType :> IMapPin>
         (
-            _: CollectionBuilder<'msg, 'marker, IPin>,
+            _: CollectionBuilder<'msg, 'marker, IMapPin>,
             x: WidgetBuilder<'msg, Memo.Memoized<'itemType>>
         ) : Content<'msg> =
         { Widgets = MutStackArray1.One(x.Compile()) }
 
     [<Extension>]
-    static member inline Yield<'msg, 'marker, 'itemType when 'itemType :> IPin>
+    static member inline Yield<'msg, 'marker, 'itemType when 'itemType :> IMapPin>
         (
-            _: CollectionBuilder<'msg, 'marker, IPin>,
+            _: CollectionBuilder<'msg, 'marker, IMapPin>,
             x: WidgetBuilder<'msg, 'itemType>
         ) : Content<'msg> =
         { Widgets = MutStackArray1.One(x.Compile()) }
