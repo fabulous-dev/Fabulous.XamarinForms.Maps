@@ -35,10 +35,6 @@ module PolylineBuilders =
 
 [<Extension>]
 type PolylineModifiers =
-    [<Extension>]
-    static member inline geoPaths(this: WidgetBuilder<'msg, #IPolyline>, value: Position list) =
-        this.AddScalar(Polyline.GeoPathList.WithValue(value))
-
     /// <summary>Link a ViewRef to access the direct Polyline control instance</summary>
     [<Extension>]
     static member inline reference(this: WidgetBuilder<'msg, IPolyline>, value: ViewRef<Polyline>) =

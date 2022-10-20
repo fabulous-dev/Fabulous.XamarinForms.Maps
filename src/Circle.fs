@@ -25,25 +25,18 @@ module CircleBuilders =
 
     type Fabulous.XamarinForms.View with
 
-        static member inline Circle<'msg>(light: FabColor, ?dark: FabColor) =
+        static member inline Circle<'msg>(center: Position, radius: Distance) =
             WidgetBuilder<'msg, ICircle>(
                 Circle.WidgetKey,
-                AttributesBundle(
-                    StackList.one (Circle.FillColor.WithValue(AppTheme.create light dark)),
-                    ValueNone,
-                    ValueNone
-                )
+                Circle.Center.WithValue(center),
+                Circle.Radius.WithValue(radius)
             )
 
 [<Extension>]
 type CircleModifiers =
     [<Extension>]
-    static member inline center(this: WidgetBuilder<'msg, #ICircle>, value: Position) =
-        this.AddScalar(Circle.Center.WithValue(value))
-
-    [<Extension>]
-    static member inline radius(this: WidgetBuilder<'msg, #ICircle>, value: Distance) =
-        this.AddScalar(Circle.Radius.WithValue(value))
+    static member inline fillColor(this: WidgetBuilder<'msg, #ICircle>, light: FabColor, ?dark: FabColor) =
+        this.AddScalar(Circle.FillColor.WithValue(AppTheme.create light dark))
 
     /// <summary>Link a ViewRef to access the direct Circle control instance</summary>
     [<Extension>]

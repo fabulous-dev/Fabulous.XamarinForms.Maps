@@ -31,11 +31,9 @@ module PinBuilders =
     type Fabulous.XamarinForms.View with
 
         /// Defines a Pin widget
-        static member inline Pin<'msg>(pinType: PinType, label: string, position: Position) =
+        static member inline Pin<'msg>(position: Position) =
             WidgetBuilder<'msg, IPin>(
                 Pin.WidgetKey,
-                Pin.PinType.WithValue(pinType),
-                Pin.Label.WithValue(label),
                 Pin.Position.WithValue(position)
             )
 
@@ -44,6 +42,14 @@ type PinModifiers =
     [<Extension>]
     static member inline address(this: WidgetBuilder<'msg, #IPin>, value: string) =
         this.AddScalar(Pin.Address.WithValue(value))
+        
+    [<Extension>]
+    static member inline label(this: WidgetBuilder<'msg, #IPin>, value: string) =
+        this.AddScalar(Pin.Label.WithValue(value))
+        
+    [<Extension>]
+    static member inline pinType(this: WidgetBuilder<'msg, #IPin>, value: PinType) =
+        this.AddScalar(Pin.PinType.WithValue(value))
 
     [<Extension>]
     static member inline onMarkerClicked(this: WidgetBuilder<'msg, #IPin>, onMarkerClicked: bool -> 'msg) =

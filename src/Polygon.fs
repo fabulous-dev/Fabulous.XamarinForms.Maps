@@ -1,6 +1,5 @@
 ﻿namespace Fabulous.XamarinForms.Maps
 
-open System.Collections.Generic
 open System.Runtime.CompilerServices
 open Fabulous
 open Fabulous.StackAllocatedCollections
@@ -24,7 +23,6 @@ module Polygon =
             | ValueNone -> map.Geopath.Clear()
             | ValueSome geoPaths -> geoPaths |> List.iter map.Geopath.Add)
 
-
 [<AutoOpen>]
 module PolygonBuilders =
 
@@ -38,10 +36,6 @@ module PolygonBuilders =
 
 [<Extension>]
 type PolygonModifiers =
-    [<Extension>]
-    static member inline geoPaths(this: WidgetBuilder<'msg, #IPolygon>, value: Position list) =
-        this.AddScalar(Polygon.GeoPathList.WithValue(value))
-
     [<Extension>]
     static member inline fillColor(this: WidgetBuilder<'msg, #IPolygon>, light: FabColor, ?dark: FabColor) =
         this.AddScalar(Polygon.FillColor.WithValue(AppTheme.create light dark))

@@ -57,19 +57,18 @@ module MapBuilders =
     type Fabulous.XamarinForms.View with
 
         /// Defines a Map widget
-        static member inline Map<'msg>() =
-            WidgetBuilder<'msg, IMap>(Map.WidgetKey, AttributesBundle(StackList.empty (), ValueNone, ValueNone))
+        static member inline Map<'msg>(?requestRegion: MapSpan) =
+            match requestRegion with
+            | Some mapSpan ->
+                WidgetBuilder<'msg, IMap>(Map.WidgetKey, AttributesBundle(StackList.one(Map.RequestedRegion.WithValue(mapSpan)), ValueNone, ValueNone))
+            | None ->
+                WidgetBuilder<'msg, IMap>(Map.WidgetKey, AttributesBundle(StackList.empty (), ValueNone, ValueNone))
 
-        static member inline MapWithPins<'msg>() =
-            CollectionBuilder<'msg, IMap, IPin>(Map.WidgetKey, Map.Pins)
+        static member inline MapWithPins<'msg>(requestRegion: MapSpan) =
+            CollectionBuilder<'msg, IMap, IPin>(Map.WidgetKey, Map.Pins, Map.RequestedRegion.WithValue(requestRegion))
 
 [<Extension>]
 type MapModifiers =
-
-    [<Extension>]
-    static member inline moveToRegion(this: WidgetBuilder<'msg, #IMap>, mapSpan: MapSpan) =
-        this.AddScalar(Map.RequestedRegion.WithValue(mapSpan))
-
     [<Extension>]
     static member inline hasZoomEnabled(this: WidgetBuilder<'msg, #IMap>, value: bool) =
         this.AddScalar(Map.HasZoomEnabled.WithValue(value))
@@ -97,10 +96,6 @@ type MapModifiers =
     [<Extension>]
     static member inline onMapClicked(this: WidgetBuilder<'msg, #IMap>, onMapClicked: Position -> 'msg) =
         this.AddScalar(Map.MapClicked.WithValue(fun args -> onMapClicked args.Position |> box))
-
-    // [<Extension>]
-    // static member inline pins<'msg, 'marker when 'marker :> IMap>(this: WidgetBuilder<'msg, 'marker>) =
-    //     WidgetHelpers.buildAttributeCollection<'msg, 'marker, IPin> Map.Pins this
 
     [<Extension>]
     static member inline mapElements<'msg, 'marker when 'marker :> IMap>(this: WidgetBuilder<'msg, 'marker>) =
