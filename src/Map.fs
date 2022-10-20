@@ -116,22 +116,6 @@ type MapModifiers =
 [<Extension>]
 type CollectionBuilderExtensions =
     [<Extension>]
-    static member inline Yield<'msg, 'marker, 'itemType when 'itemType :> IMapPin>
-        (
-            _: AttributeCollectionBuilder<'msg, 'marker, IMapPin>,
-            x: WidgetBuilder<'msg, 'itemType>
-        ) : Content<'msg> =
-        { Widgets = MutStackArray1.One(x.Compile()) }
-
-    [<Extension>]
-    static member inline Yield<'msg, 'marker, 'itemType when 'itemType :> IMapPin>
-        (
-            _: AttributeCollectionBuilder<'msg, 'marker, IMapPin>,
-            x: WidgetBuilder<'msg, Memo.Memoized<'itemType>>
-        ) : Content<'msg> =
-        { Widgets = MutStackArray1.One(x.Compile()) }
-
-    [<Extension>]
     static member inline Yield<'msg, 'marker, 'itemType when 'itemType :> IMapElement>
         (
             _: AttributeCollectionBuilder<'msg, 'marker, IMapElement>,
