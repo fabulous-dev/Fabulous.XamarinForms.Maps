@@ -32,8 +32,6 @@ Map(MapSpan.FromCenterAndRadius(Position(47.640663, -122.1376177), Distance.From
     .isTrafficEnabled(true)
     .onMapClicked (MapClicked)
 ```
-- Display a pin : [More](https://learn.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/map/pins#display-a-pin)
-
 ```f#
 let position = Position(36.9628066, -122.0194722)
 let mapSpan = MapSpan(position, 0.01, 0.01)
