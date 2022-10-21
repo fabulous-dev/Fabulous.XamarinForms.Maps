@@ -17,7 +17,12 @@ The Map widget will be rendered by the native map controls of each platform depe
 Please follow the Xamarin.Forms documentation to learn about the requirements: [Xamarin.Forms Map Initialization and Configuration](https://learn.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/map/setup)
 
 ### Usage
-- Display a specific location on a map : [More](https://learn.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/map/map)
+This package adds several widgets for you to use:
+- `Map(region: MapSpan)` : Displays a map centered on the position specified
+- `MapWithPins(region: MapSpan) { MapPin; MapPin; ... }` : Displays a map with some pins on it
+
+To learn more about the capabilities of the Map and MapWithPins widgets, see [Xamarin.Forms Map Control](https://learn.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/map/map)
+To learn more about pins, see [Xamarin.Forms Map Pins](https://learn.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/map/pins)```
 ```f#
 Map(MapSpan.FromCenterAndRadius(Position(47.640663, -122.1376177), Distance.FromMiles(250.)))
     .hasZoomEnabled(true)
