@@ -1,4 +1,4 @@
-## Xamarin.Forms.Maps implementation for Fabulous
+## Maps for Fabulous.XamarinForms
 
 The Map control is a cross-platform view for displaying and annotating maps. [Xamarin.Forms.Maps](https://learn.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/map/)
 
