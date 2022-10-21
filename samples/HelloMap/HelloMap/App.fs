@@ -39,14 +39,14 @@ module App =
                 .label("I'm a marker1")
                 .pinType(PinType.Place)
                 .onMarkerClicked(MarkerClicked)
-                .onInfoWindowClicked(MarkerClicked)
+                .onInfoWindowClicked (MarkerClicked)
 
             MapPin(Position(36.9641949, -122.0177232))
                 .address("My Address2")
                 .label("I'm a marker1")
                 .pinType(PinType.Place)
                 .onMarkerClicked(MarkerClicked)
-                .onInfoWindowClicked(MarkerClicked)
+                .onInfoWindowClicked (MarkerClicked)
         })
 
     let mapWithPolylineElement () =
@@ -65,7 +65,7 @@ module App =
                   Position(47.6414654, -122.1432702) ]
             )
                 .strokeColor(Color.Blue.ToFabColor())
-                .strokeWidth(12.)
+                .strokeWidth (12.)
         }
 
     let mapWihCircleElement () =
@@ -73,7 +73,7 @@ module App =
             MapCircle(Position(37.79752, -122.40183), Distance(250.))
                 .fillColor(Color.FromHex("#88FFC0CB").ToFabColor())
                 .strokeColor(Color.FromHex("#88FF0000").ToFabColor())
-                .strokeWidth(8.)
+                .strokeWidth (8.)
         }
 
     let mapWithPolygonElement () =
@@ -127,11 +127,12 @@ module App =
     let view (_: Model) =
         Application(
             (TabbedPage("HelloMap") {
-                ContentPage("Map", map())
-                ContentPage("Region", mapWithRegion())
-                ContentPage("Pins", mapWithPins())
-                ContentPage("Circle", mapWihCircleElement())
-                ContentPage("Polyline", mapWithPolylineElement())
+                ContentPage("Map", map ())
+                ContentPage("Region", mapWithRegion ())
+                ContentPage("Pins", mapWithPins ())
+                ContentPage("Circle", mapWihCircleElement ())
+                ContentPage("Polyline", mapWithPolylineElement ())
+
                 ContentPage(
                     "Polygons",
                     mapWithPolygonElement()
