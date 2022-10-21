@@ -58,15 +58,11 @@ module MapBuilders =
 
         /// <summary>The Map control is a cross-platform view for displaying and annotating maps</summary>
         /// <param name ="requestRegion">The region of a map to display when a map is loaded can be set by passing a MapSpan.</param>
-        static member inline Map<'msg>(?requestRegion: MapSpan) =
-            match requestRegion with
-            | Some mapSpan ->
-                WidgetBuilder<'msg, IMap>(
-                    Map.WidgetKey,
-                    AttributesBundle(StackList.one (Map.RequestedRegion.WithValue(mapSpan)), ValueNone, ValueNone)
-                )
-            | None ->
-                WidgetBuilder<'msg, IMap>(Map.WidgetKey, AttributesBundle(StackList.empty (), ValueNone, ValueNone))
+        static member inline Map<'msg>(requestRegion: MapSpan) =
+            WidgetBuilder<'msg, IMap>(
+                Map.WidgetKey,
+                AttributesBundle(StackList.one (Map.RequestedRegion.WithValue(requestRegion)), ValueNone, ValueNone)
+            )
 
         /// <summary>The Map control is a cross-platform view for displaying and annotating maps</summary>
         /// <param name ="requestRegion">The region of a map to display when a map is loaded can be set by passing a MapSpan.</param>

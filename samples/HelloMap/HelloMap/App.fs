@@ -24,8 +24,6 @@ module App =
         | MapClicked _ -> model, Cmd.none
         | MarkerClicked _ -> model, Cmd.none
 
-    let map () = Map()
-
     let mapWithRegion () =
         Map(MapSpan.FromCenterAndRadius(Position(47.640663, -122.1376177), Distance.FromMiles(250.)))
 
@@ -123,11 +121,9 @@ module App =
                 .strokeColor (Color.Black.ToFabColor())
         }
 
-
     let view (_: Model) =
         Application(
             (TabbedPage("HelloMap") {
-                ContentPage("Map", map ())
                 ContentPage("Region", mapWithRegion ())
                 ContentPage("Pins", mapWithPins ())
                 ContentPage("Circle", mapWihCircleElement ())
