@@ -126,21 +126,23 @@ module App =
 
     let view (_: Model) =
         Application(
-            ContentPage(
-                "HelloMap",
-                //map()
-                //mapWithRegion()
-                //mapWithPins()
-                //mapWihCircleElement()
-                //mapWithPolylineElement()
-                mapWithPolygonElement()
-                    .hasZoomEnabled(true)
-                    .hasScrollEnabled(true)
-                    .mapType(MapType.Street)
-                    .isShowingUser(true)
-                    .isTrafficEnabled(true)
-                    .onMapClicked (MapClicked)
-            )
+            (TabbedPage("HelloMap") {
+                ContentPage("Map", map())
+                ContentPage("Region", mapWithRegion())
+                ContentPage("Pins", mapWithPins())
+                ContentPage("Circle", mapWihCircleElement())
+                ContentPage("Polyline", mapWithPolylineElement())
+                ContentPage(
+                    "Polygons",
+                    mapWithPolygonElement()
+                        .hasZoomEnabled(true)
+                        .hasScrollEnabled(true)
+                        .mapType(MapType.Street)
+                        .isShowingUser(true)
+                        .isTrafficEnabled(true)
+                        .onMapClicked (MapClicked)
+                )
+            })
                 .ignoreSafeArea ()
         )
 
