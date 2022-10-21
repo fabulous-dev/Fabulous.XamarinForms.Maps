@@ -4,7 +4,7 @@ The Map control is a cross-platform view for displaying and annotating maps. You
 
 ### How to use
 
-Add the Fabulous.XamarinForms.Maps package to your project
+1. Add the [Fabulous.XamarinForms.Maps package](https://www.nuget.org/packages/Fabulous.XamarinForms.Maps) to your project.
 
 Open Fabulous.XamarinForms.Maps at the top of the file where you declare your Fabulous program (eg. Program.stateful).
 ```f#
