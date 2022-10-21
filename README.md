@@ -11,8 +11,9 @@ Open Fabulous.XamarinForms.Maps at the top of the file where you declare your Fa
 open Fabulous.XamarinForms.Maps package
 ```
 ### Initialization and Configuration
-The Map control uses the native map control on each platform. Some configuration steps are needed to adhere to each platforms API requirements.
-[More](https://learn.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/map/setup)
+The Map widget will be rendered by the native map controls of each platform depending on the device you're running on. Some of those platforms require that you make some configuration before being able to use the `Map` widget.
+
+Please follow the Xamarin.Forms documentation to learn about the requirements: [Xamarin.Forms Map Initialization and Configuration](https://learn.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/map/setup)
 
 ### Usage
 - Display a specific location on a map : [More](https://learn.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/map/map)
