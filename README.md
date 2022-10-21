@@ -58,6 +58,7 @@ It supports several shapes: `MapCircle`, `MapPolygon`, `MapPolyline`.
 ```f#
 Map(MapSpan.FromCenterAndRadius(Position(47.640663, -122.1376177), Distance.FromMiles(1.)))
     .mapElements () {
+        // Draw a polygon on the map
         MapPolygon(
             [ Position(47.6458676, -122.1356007)
               Position(47.6458097, -122.142789)
@@ -71,22 +72,14 @@ Map(MapSpan.FromCenterAndRadius(Position(47.640663, -122.1376177), Distance.From
             .strokeWidth(8.)
             .fillColor(Color.Red.ToFabColor())
             .strokeColor (Color.Blue.ToFabColor())
-        }
-```
-- Draw a Circle: [More](https://learn.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/map/polygons#create-a-circle)
-```f#
-Map(MapSpan(Position(37.79752, -122.40183), 0.01, 0.01)).mapElements () {
-    MapCircle(Position(37.79752, -122.40183), Distance(250.))
-        .fillColor(Color.FromHex("#88FFC0CB").ToFabColor())
-        .strokeColor(Color.FromHex("#88FF0000").ToFabColor())
-        .strokeWidth (8.)
-}
-```
-- Draw a Polyline : [More](https://learn.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/map/polygons#create-a-polyline)
-
-```f#
-Map(MapSpan.FromCenterAndRadius(Position(47.640663, -122.1376177), Distance.FromMiles(1.)))
-    .mapElements () {
+            
+        // Draw a circle on the map
+        MapCircle(Position(37.79752, -122.40183), Distance(250.))
+            .fillColor(Color.FromHex("#88FFC0CB").ToFabColor())
+            .strokeColor(Color.FromHex("#88FF0000").ToFabColor())
+            .strokeWidth (8.)
+            
+        // Draw a polyline on the map
         MapPolyline(
             [ Position(47.6381401, -122.1317367)
               Position(47.6381473, -122.1350841)
@@ -101,5 +94,4 @@ Map(MapSpan.FromCenterAndRadius(Position(47.640663, -122.1376177), Distance.From
         )
             .strokeColor(Color.Blue.ToFabColor())
             .strokeWidth (12.)
-}
-```
+    }
