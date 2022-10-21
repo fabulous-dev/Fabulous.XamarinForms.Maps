@@ -26,6 +26,8 @@ module MapPolylineBuilders =
 
     type Fabulous.XamarinForms.View with
 
+        /// <summary>A Polyline object can be added to a map by instantiating it and adding it to the map's MapElements collection.</summary>
+        /// <param name ="geoPaths">Contains a list of Position objects defining the geographic coordinates of the polyline points. A Polyline object is rendered on the map once it has been added to the MapElements collection of the Map.</param>
         static member inline MapPolyline<'msg>(geoPaths: Position list) =
             WidgetBuilder<'msg, IMapPolyline>(
                 MapPolyline.WidgetKey,

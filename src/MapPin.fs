@@ -5,7 +5,6 @@ open Fabulous
 open Fabulous.XamarinForms
 open Xamarin.Forms.Maps
 
-
 type IMapPin =
     inherit Fabulous.XamarinForms.IElement
 
@@ -31,28 +30,37 @@ module MapPin =
 module MapPinBuilders =
     type Fabulous.XamarinForms.View with
 
-        /// Defines a Pin widget
+        /// <summary>Map control allows locations to be marked with Pin objects. A Pin is a map marker that opens an information window.</summary>
+        /// <param name ="position">Represents the latitude and longitude of the pin.</param>
         static member inline MapPin<'msg>(position: Position) =
             WidgetBuilder<'msg, IMapPin>(MapPin.WidgetKey, MapPin.Position.WithValue(position))
 
 [<Extension>]
 type MapPinModifiers =
+    /// <summary>Represents the address for the pin location.</summary>
+    /// <param name ="value">It can be any string content, not just an address.</param>
     [<Extension>]
     static member inline address(this: WidgetBuilder<'msg, #IMapPin>, value: string) =
         this.AddScalar(MapPin.Address.WithValue(value))
 
+    /// <summary>Represents the pin title.</summary>
     [<Extension>]
     static member inline label(this: WidgetBuilder<'msg, #IMapPin>, value: string) =
         this.AddScalar(MapPin.Label.WithValue(value))
 
+    /// <summary>Represents the type of pin.</summary>
     [<Extension>]
     static member inline pinType(this: WidgetBuilder<'msg, #IMapPin>, value: PinType) =
         this.AddScalar(MapPin.PinType.WithValue(value))
 
+    /// <summary>Event that is fired when the user presses the map marker.</summary>
+    /// <param name="onMarkerClicked">Msg to dispatch when the user presses the map marker.</param>
     [<Extension>]
     static member inline onMarkerClicked(this: WidgetBuilder<'msg, #IMapPin>, onMarkerClicked: bool -> 'msg) =
         this.AddScalar(MapPin.MarkerClicked.WithValue(fun args -> onMarkerClicked args.HideInfoWindow |> box))
 
+    /// <summary>Event that is fired when the user presses the map marker info window.</summary>
+    /// <param name="onInfoWindowClicked">Msg to dispatch when the user presses the map marker info window.</param>
     [<Extension>]
     static member inline onInfoWindowClicked(this: WidgetBuilder<'msg, #IMapPin>, onInfoWindowClicked: bool -> 'msg) =
         this.AddScalar(MapPin.InfoWindowClicked.WithValue(fun args -> onInfoWindowClicked args.HideInfoWindow |> box))
