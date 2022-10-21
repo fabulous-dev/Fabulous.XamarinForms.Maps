@@ -52,7 +52,8 @@ let mapSpan = MapSpan(position, 0.01, 0.01)
         .onInfoWindowClicked (MarkerClicked)
 })
 ```
-- Draw a Polygon [More](https://learn.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/map/polygons)
+It is also possible to draw shapes directly on the map using the `.mapElements() { ... }` modifier.  
+It supports several shapes: `MapCircle`, `MapPolygon`, `MapPolyline`.
 
 ```f#
 Map(MapSpan.FromCenterAndRadius(Position(47.640663, -122.1376177), Distance.FromMiles(1.)))
