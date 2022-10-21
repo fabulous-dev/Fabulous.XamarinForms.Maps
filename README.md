@@ -7,10 +7,13 @@ The Map control is a cross-platform view for displaying and annotating maps. You
 1. Add the [Fabulous.XamarinForms.Maps package](https://www.nuget.org/packages/Fabulous.XamarinForms.Maps) to your project.
 
 2. Open Fabulous.XamarinForms.Maps at the top of the file where you declare your Fabulous program (eg. Program.stateful).
-3. Depending on which platform you're targeting, you might need to do some configuration before the map widget will work. See "Initialization and Configuration" down below.
+
 ```f#
 open Fabulous.XamarinForms.Maps
 ```
+
+3. Depending on which platform you're targeting, you might need to do some configuration before the map widget will work. See "Initialization and Configuration" down below.
+
 ### Initialization and Configuration
 The Map widget will be rendered by the native map controls of each platform depending on the device you're running on. Some of those platforms require that you make some configuration before being able to use the `Map` widget.
 
@@ -21,8 +24,9 @@ This package adds several widgets for you to use:
 - `Map(region: MapSpan)` : Displays a map centered on the position specified
 - `MapWithPins(region: MapSpan) { MapPin; MapPin; ... }` : Displays a map with some pins on it
 
-To learn more about the capabilities of the Map and MapWithPins widgets, see [Xamarin.Forms Map Control](https://learn.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/map/map)
-To learn more about pins, see [Xamarin.Forms Map Pins](https://learn.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/map/pins)```
+To learn more about the capabilities of the Map and MapWithPins widgets, see [Xamarin.Forms Map Control](https://learn.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/map/map)  
+To learn more about pins, see [Xamarin.Forms Map Pins](https://learn.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/map/pins)
+
 ```f#
 Map(MapSpan.FromCenterAndRadius(Position(47.640663, -122.1376177), Distance.FromMiles(250.)))
     .hasZoomEnabled(true)
