@@ -1,5 +1,7 @@
 ## Maps for Fabulous.XamarinForms
 
+[![build](https://github.com/fsharp-mobile/Fabulous.XamarinForms.Maps/actions/workflows/build.yml/badge.svg)](https://github.com/fsharp-mobile/Fabulous.XamarinForms.Maps/actions/workflows/dotnet.yml) [![Fabulous.XamarinForms.Maps NuGet version](https://badge.fury.io/nu/Fabulous.XamarinForms.Maps.svg)](https://badge.fury.io/nu/Fabulous.XamarinForms.Maps) [![Discord](https://img.shields.io/discord/716980335593914419?label=discord&logo=discord)](https://discord.gg/bpTJMbSSYK)
+
 The Map control is a cross-platform view for displaying and annotating maps. You can find all the details about this control on the [Xamarin.Forms.Maps documentation](https://learn.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/map/).
 
 ### How to use
