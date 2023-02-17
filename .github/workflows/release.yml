@@ -28,7 +28,7 @@ jobs:
       run: dotnet test -p:Version="${MAJOR}.${MINOR}.${PATCH}" --no-build --configuration Release ${SLN_FILE}
     - name: Pack
       run: |
-        dotnet pack -p:Version="${MAJOR}.${MINOR}.${PATCH}" --configuration Release --output nupkgs ${SLN_FILE}
+        dotnet pack -p:Version="${MAJOR}.${MINOR}.${PATCH}" --configuration Release --property PackageOutputPath=${PWD}/nupkgs ${SLN_FILE}
     - name: Push
       run: |
         dotnet nuget push "nupkgs/*.nupkg" -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_TOKEN }} --skip-duplicate

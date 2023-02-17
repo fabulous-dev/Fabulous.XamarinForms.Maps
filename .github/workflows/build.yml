@@ -26,7 +26,7 @@ jobs:
       run: dotnet test -p:Version=${VERSION}-nightly-${GITHUB_RUN_ID} --no-build --configuration Release ${SLN_FILE}
     - name: Pack
       run: |
-        dotnet pack -p:Version=${VERSION}-nightly-${GITHUB_RUN_ID} --configuration Release --output nupkgs ${SLN_FILE}
+        dotnet pack -p:Version=${VERSION}-nightly-${GITHUB_RUN_ID} --configuration Release --property PackageOutputPath=${PWD}/nupkgs ${SLN_FILE}
     - name: Push
       run: |
         dotnet nuget push "nupkgs/*.nupkg" -s https://nuget.pkg.github.com/fsharp-mobile/index.json -k ${{ secrets.GITHUB_TOKEN }} --skip-duplicate
